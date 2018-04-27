@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FootBallGame</string>
+    <string name="dibu_daohang_saiji">赛季</string>
+    <string name="dibu_daohang_qiudui">球队</string>
+    <string name="dibu_daohang_saishi">赛事</string>
+    <string name="dibu_daohang_paihang">排行榜</string>
+
+    <string name="saiji">赛季</string>
+    <string name="xiaozu">小组</string>
+    <string name="lunci">轮次</string>
+    <string name="changshu">场数</string>
+    <string name="geyuandui">各院队</string>
+</resources>

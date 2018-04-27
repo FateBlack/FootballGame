@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_01"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_saikuang_team1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:src="@drawable/football_dianqi"
+                    />
+
+                <TextView
+                    android:textColor="#000"
+                    android:id="@+id/tv_saikuang_team1name"
+                    android:gravity="center"
+                    android:text="电气"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <LinearLayout
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/tv_saikuang_saiji"
+                        android:gravity="center_horizontal"
+                        android:text="赛季"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        />
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/tv_saikuang_jibie"
+                        android:text="级别"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    android:text="实时赛况"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:src="@drawable/vs"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_saikuang_team2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:src="@drawable/football_guanli"
+                    />
+
+                <TextView
+                    android:textColor="#000"
+                    android:id="@+id/tv_saikuang_team2name"
+                    android:gravity="center"
+                    android:text="管理"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_01"
+            android:layout_below="@+id/ll_01"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tv_title_team1name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="电气赛点"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <EditText
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/et_team1_saikuang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:hint="请输入实时赛况"
+                android:textSize="18dp" />
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/bt_team1_baodao"
+                android:textSize="18dp"
+                android:textColor="#fff"
+                android:background="@drawable/yuan_button"
+                android:text="报道"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tv_title_team2name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="管理赛点"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <EditText
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/et_team2_saikuang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:hint="请输入实时赛况"
+                android:textSize="18dp" />
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/bt_team2_baodao"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/yuan_button"
+                android:text="报道"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="比分更新"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/grey"
+                android:id="@+id/et_saikuang_team1score"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="0"
+                android:textSize="59dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.2"
+                android:text=":"
+                android:textColor="@color/colorPrimary"
+                android:textSize="50dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/grey"
+                android:id="@+id/et_saikuang_team2score"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="0"
+                android:textSize="59dp" />
+
+            <Button
+                android:id="@+id/bt_score_gengxin"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.7"
+                android:background="@drawable/yuan_button"
+                android:text="更新"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
