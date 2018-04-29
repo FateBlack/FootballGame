@@ -13,7 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.cxjd.footballgame.R;
+import com.cxjd.footballgame.bean.User;
+import com.cxjd.footballgame.utils.HttpUtil;
+import com.cxjd.footballgame.utils.JsonUtil;
 import com.cxjd.footballgame.utils.SoftKeyboardStateHelper;
+
+import java.io.IOException;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * 项目名： FootBallGame
@@ -36,6 +46,11 @@ public class LoginActivity extends Activity{
     private String password;
     //登录按钮
     private Button dengLu;
+
+    // 用户集合
+    private List<User> userList;
+    // 请求地址
+    String address = "http://";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,13 +106,47 @@ public class LoginActivity extends Activity{
             public void onClick(View view) {
                 userName =  userEt.getText().toString();
                 password = passEt.getText().toString();
-                if(userName.equals("yinhaonan")&&password.equals("1234")){
+
+                if (userName != null && userName.length() > 0 && password != null && password.length() > 0) {
+                    queryFromServer(address);
+                }else {
+                    return;
+                }
+
+                if (userList != null && !userList.isEmpty()) {
+                    for (User user : userList) {
+                        if (user.getName().equals(userName) && user.getPassword().equals(password)) {
+                            user.save();
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }
+
+                Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
+               /* if(userName.equals("yinhaonan")&&password.equals("1234")){
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
     }
+
+    public void queryFromServer(String address) {
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                userList = JsonUtil.handleUserReponse(responseText);
+            }
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Toast.makeText(LoginActivity.this, "发送请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

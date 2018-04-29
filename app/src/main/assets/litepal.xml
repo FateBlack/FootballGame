@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="FootBallStore"></dbname>
+    <version value="11"></version>
+    <list>
+        <mapping class="com.cxjd.footballgame.bean.User"></mapping>
+    </list>
+</litepal>

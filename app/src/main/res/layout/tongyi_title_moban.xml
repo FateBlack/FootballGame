@@ -54,8 +54,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/tongyi_ringt_image"
                     android:layout_marginRight="20dp"
@@ -63,9 +61,6 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/football_dong" />
-
-
-
 
             </RelativeLayout>
 
