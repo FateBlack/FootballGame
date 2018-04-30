@@ -55,7 +55,7 @@ public class QiuDuiAdapter extends RecyclerView.Adapter<QiuDuiAdapter.ViewHolder
                 QiuDui qiuDui = mQiuDuiList.get(position);
                 //进入球队详情页面
                 Intent intent = new Intent(view.getContext(), YuanDuiActivity.class);
-                intent.putExtra("imgId",qiuDui.getImgId());
+                //intent.putExtra("imgId",qiuDui.getImgId());
                 intent.putExtra("naem",qiuDui.getName());
                 view.getContext().startActivity(intent);
             }
@@ -66,7 +66,7 @@ public class QiuDuiAdapter extends RecyclerView.Adapter<QiuDuiAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
          QiuDui qiuDui = mQiuDuiList.get(position);
-         holder.qiuDuiImage.setImageResource(qiuDui.getImgId());
+         holder.qiuDuiImage.setImageBitmap(qiuDui.getLog());
          holder.qiuDuiName.setText(qiuDui.getName());
     }
 

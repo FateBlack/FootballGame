@@ -1,6 +1,9 @@
 package com.cxjd.footballgame.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,12 +16,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cxjd.footballgame.R;
+import com.cxjd.footballgame.activity.LoginActivity;
 import com.cxjd.footballgame.adapter.QiuDuiAdapter;
 import com.cxjd.footballgame.bean.QiuDui;
+import com.cxjd.footballgame.utils.HttpUtil;
+import com.cxjd.footballgame.utils.JsonUtil;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import pl.droidsonroids.gif.GifImageView;
 
 /**
@@ -35,6 +49,10 @@ public class QiuDuiFragment extends Fragment{
     private TextView mainTitle;
     //添加图标
     private ImageView add;
+
+    /** 图片存储路径 **/
+    File PHOTO_DIR = new File(Environment.getExternalStorageDirectory()+"image");
+
 
     //用于存放球队对象的集合
     private List<QiuDui> qiuDuiList = new ArrayList<>();
@@ -69,12 +87,16 @@ public class QiuDuiFragment extends Fragment{
     }
 
     private void initData(){
+
+
           for (int i=0; i<n; i++){
               QiuDui qiuDui = new QiuDui();
-              qiuDui.setImgId(logos[i]);
+            //  qiuDui.setImgId(logos[i]);
               qiuDui.setName(qiuDius[i]);
               qiuDuiList.add(qiuDui);
           }
+
+
     }
 
     private void initView(View view) {
@@ -82,6 +104,10 @@ public class QiuDuiFragment extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.rv_qiudui);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
+
+        /** 加载 服务器端数据 和 网络图片 **/
+        queryQiudui();
+
         QiuDuiAdapter adapter = new QiuDuiAdapter(qiuDuiList);
         recyclerView.setAdapter(adapter);
         //主标题初始化
@@ -102,5 +128,81 @@ public class QiuDuiFragment extends Fragment{
             }
         });
     }
+
+    private void queryQiudui(){
+        qiuDuiList = DataSupport.findAll(QiuDui.class);
+
+        if (qiuDuiList.get(0).getState() == 1) {
+            for (QiuDui qiuDui : qiuDuiList) {
+                Bitmap bitmap = readPhoto(qiuDui.getLocalPath());
+                qiuDui.setLog(bitmap);
+            }
+        }else{
+            //TODO
+            String address = "http://---------------------------------------";
+            queryFromServer(address);
+        }
+    }
+
+
+    private void queryFromServer(String address) {
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                boolean result = false;
+
+                result = JsonUtil.handleQiuDuiReponse(responseText);
+
+                if (result) {
+                    qiuDuiList = DataSupport.findAll(QiuDui.class);
+
+                    for (QiuDui qiuDui : qiuDuiList) {
+                        setBitmap(qiuDui);
+                    }
+                    queryQiudui();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Toast.makeText(getContext(), "加载图片失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // 把网络 图片 加入 qiuDuiList 中
+    private void setBitmap(final QiuDui qiuDui) {
+        HttpUtil.sendOkHttpRequest(qiuDui.getLogUrl(), new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                InputStream inputStream = response.body().byteStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                qiuDui.setLog(bitmap);
+            }
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+        });
+    }
+
+    // 读取本地图片
+    private Bitmap readPhoto(String localPath){
+        Bitmap bitmap = null;
+        try {
+            File avaterFile = new File(PHOTO_DIR, "");
+            if (avaterFile.exists()) {
+                bitmap = BitmapFactory.decodeFile(PHOTO_DIR+"/"+"");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+
+
 
 }

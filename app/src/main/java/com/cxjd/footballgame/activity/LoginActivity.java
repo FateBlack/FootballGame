@@ -2,6 +2,7 @@ package com.cxjd.footballgame.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.cxjd.footballgame.utils.HttpUtil;
 import com.cxjd.footballgame.utils.JsonUtil;
 import com.cxjd.footballgame.utils.SoftKeyboardStateHelper;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -148,5 +151,6 @@ public class LoginActivity extends Activity{
             }
         });
     }
+
 
 }
